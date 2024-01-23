@@ -1,4 +1,6 @@
 commando
 ========
 
-Refactoring exercises for inheritance versus composition in java
+Refactoring exercises for Inheritance versus Composition.
+
+[Original exercise](https://github.com/hillmlogica/commando) by Mike Hill and Ivan Moore.
