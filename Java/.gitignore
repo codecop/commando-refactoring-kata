@@ -1,2 +1,25 @@
-*.class
-workspace.xml
+# Eclipse
+.project
+local.properties
+.classpath
+.settings/**
+.loadpath
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# Intellij
+.idea/**
+*.iml
+*.iws
+*.ipr
+*.ids
+
+# Maven
+/target/
+
+# Gradle
+/build/
+.gradle/
+
+hs_err_pid*
