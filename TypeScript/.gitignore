@@ -1,0 +1,28 @@
+.DS_Store
+
+# NPM
+node_modules/
+npm-debug.log
+package-lock.json
+
+coverage/
+.nyc_output/
+.stryker-tmp
+
+# Typescript
+src/**/*.js
+src/**/*.js.map
+test/**/*.js
+test/**/*.js.map
+tsconfig.tsbuildinfo
+dist/
+typings
+
+# Eclipse
+.project
+.settings
+.classpath
+
+# IDEA
+.idea
+*.iml

@@ -1,0 +1,44 @@
+name: Test TypeScript
+
+on:
+  push:
+    paths:
+      - 'TypeScript/**'
+      - '.github/workflows/TypeScript.yml'
+  pull_request:
+    paths:
+      - 'TypeScript/**'
+      - '.github/workflows/TypeScript.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10, 12, 14, 16, 18]
+
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Cache Node packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-${{ hashFiles('TypeScript/package.json') }}
+        restore-keys: ${{ runner.os }}-npm
+
+    - name: Set up dependencies
+      working-directory: TypeScript
+      run: npm install --force
+
+    - name: Build and test
+      working-directory: TypeScript
+      run: |
+        npm run build
+        npm test
