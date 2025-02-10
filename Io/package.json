@@ -1,0 +1,11 @@
+{
+  "name": "commando",
+  "version": "1.0.0",
+  "protos": [ "AbstractCommand", "MultiplyCommand", "SumOfSquaresCommand" ],
+  "dependencies": {
+    "libs": [],
+    "headers": [],
+    "protos": [],
+    "packages": []
+  }
+}
