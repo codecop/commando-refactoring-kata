@@ -1,7 +1,6 @@
 class InvalidCommandException(Exception):
-    def __init__(self, command: str, cause: str):
+    def __init__(self, command: str):
         super().__init__(f"Invalid command: {command}")
-        self.cause = cause
 
 
 class AbstractCommand:
@@ -11,12 +10,9 @@ class AbstractCommand:
 
         try:
             first_number = int(parts[0])
-        except ValueError:
-            raise InvalidCommandException(command, parts[0])
-        try:
             second_number = int(parts[1])
-        except ValueError:
-            raise InvalidCommandException(command, parts[1])
+        except ValueError as e:
+            raise InvalidCommandException(command) from e
 
         return str(self.do_something_with(first_number, second_number))
 

@@ -8,11 +8,8 @@ export default abstract class AbstractCommand {
         const firstNumber = parseInt(parts[0]);
         const secondNumber = parseInt(parts[1]);
 
-        if (isNaN(firstNumber)) {
-            throw new InvalidCommandException(command, parts[0]);
-        }
-        if (isNaN(secondNumber)) {
-            throw new InvalidCommandException(command, parts[1]);
+        if (isNaN(firstNumber) || isNaN(secondNumber)) {
+            throw new InvalidCommandException(command);
         }
 
         return "" + this.doSomethingWith(firstNumber, secondNumber);

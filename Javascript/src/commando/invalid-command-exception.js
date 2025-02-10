@@ -1,8 +1,7 @@
 class InvalidCommandException extends Error {
 
-    constructor(command, cause) {
+    constructor(command) {
         super("Invalid command: " + command);
-        this.cause = cause;
     }
 
 }
