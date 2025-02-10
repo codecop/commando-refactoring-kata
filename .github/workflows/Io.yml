@@ -20,7 +20,7 @@ jobs:
     - name: Set up Io
       run: |
         wget -q http://iobin.suspended-chord.info/linux/iobin-linux-x64-deb-current.zip
-        unzip -qq iobin-linux-x64-deb-current.zip
+        unzip -o -qq iobin-linux-x64-deb-current.zip
         sudo dpkg -i IoLanguage-2013.11.04-Linux-x64.deb
         sudo ldconfig
         io --version
