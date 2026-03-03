@@ -42,9 +42,9 @@ jobs:
     - name: Test
       working-directory: FreeBASIC
       run: |
-        fbc -mt -g -exx -w all -w error -i inc -p lib tests/split_test.bas
+        ./compile.sh tests/split_test.bas
         ./tests/split_test
-        fbc -mt -g -exx -w all -w error -i inc -p lib tests/multiply_command_test.bas
+        ./compile.sh tests/multiply_command_test.bas
         ./tests/multiply_command_test
-        fbc -mt -g -exx -w all -w error -i inc -p lib tests/sum_of_squares_command_test.bas
+        ./compile.sh tests/sum_of_squares_command_test.bas
         ./tests/sum_of_squares_command_test
