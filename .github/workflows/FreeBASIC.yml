@@ -37,15 +37,7 @@ jobs:
 
     - name: Set up dependencies
       working-directory: FreeBASIC
-      run: |
-        mkdir inc
-        mkdir lib
-        git clone https://github.com/jayrm/fbcunit.git
-        cd fbcunit
-        make
-        cp inc/* ../inc/
-        cp lib/* ../lib/
-        cd ..
+      run: ./install_dependencies.sh
 
     - name: Test
       working-directory: FreeBASIC
