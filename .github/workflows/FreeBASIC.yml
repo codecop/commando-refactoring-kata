@@ -1,0 +1,58 @@
+name: Test FreeBASIC
+
+on:
+  push:
+    paths:
+      - 'FreeBASIC/**'
+      - '.github/workflows/FreeBASIC.yml'
+  pull_request:
+    paths:
+      - 'FreeBASIC/**'
+      - '.github/workflows/FreeBASIC.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v4
+
+    - name: Set up FreeBASIC dependencies
+      working-directory: FreeBASIC
+      run: |
+        sudo apt-get update
+        sudo apt-get install gcc-multilib g++-multilib
+        sudo apt-get install lib32ncurses5-dev
+        sudo apt-get install libx11-dev libxext-dev libxrender-dev libxrandr-dev libxpm-dev
+
+    - name: Set up FreeBASIC
+      working-directory: FreeBASIC
+      run: |
+        wget -q 'https://sourceforge.net/projects/fbc/files/FreeBASIC-1.10.1/Binaries-Linux/FreeBASIC-1.10.1-ubuntu-22.04-x86_64.tar.gz/download?download=#' -O FreeBASIC-1.10.1-ubuntu-22.04-x86_64.tar.gz
+        tar -xf FreeBASIC-1.10.1-ubuntu-22.04-x86_64.tar.gz
+        cd FreeBASIC-1.10.1-ubuntu-22.04-x86_64
+        sudo ./install.sh -i
+        cd ..
+        fbc --version
+
+    - name: Set up dependencies
+      working-directory: FreeBASIC
+      run: |
+        mkdir inc
+        mkdir lib
+        git clone https://github.com/jayrm/fbcunit.git
+        cd fbcunit
+        make
+        cp inc/* ../inc/
+        cp lib/* ../lib/
+        cd ..
+
+    - name: Test
+      working-directory: FreeBASIC
+      run: |
+        fbc -mt -g -exx -w all -w error -i inc -p lib tests/split_test.bas
+        ./tests/split_test
+        fbc -mt -g -exx -w all -w error -i inc -p lib tests/multiply_command_test.bas
+        ./tests/multiply_command_test
+        fbc -mt -g -exx -w all -w error -i inc -p lib tests/sum_of_squares_command_test.bas
+        ./tests/sum_of_squares_command_test
